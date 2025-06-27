@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { AxiosInstance } from "../routes/axiosInstance";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -16,46 +18,61 @@ const RegisterPage = () => {
   const validateInputs = (data) => {
     let { username, email, password, confirmpassword } = data;
     if (username.trim() === "") {
-      alert("enter username");
+      toast.error("enter username");
       return false;
-
     } else if (username.trim().length < 6) {
-      alert("username should be atleast 6 characters");
+      toast.error("username should be atleast 6 characters");
       return false;
-
     } else if (email.trim() === "") {
-      alert("Enter email");
+      toast.error("Enter email");
       return false;
-
     } else if (password.trim().length < 8) {
-      alert("password should be atleast 8 characters");
+      toast.error("password should be atleast 8 characters");
       return false;
-
     } else if (confirmpassword.trim() !== password.trim()) {
-      alert("password mismatch");
+      toast.error("password mismatch");
       return false;
-
     } else {
       console.log("Good to go");
       return true;
     }
   };
 
-  const register = (e) => {
+  const register = async (e) => {
     e.preventDefault();
     if (!validateInputs(formData)) return;
 
-    console.log("Form Submitted");
-    console.log(formData);
+    try {
+      let response = await AxiosInstance.post(`/users`, formData);
+      console.log(response);
+
+      toast.success("Signup Successfully");
+
+      // reset form fields
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+        confirmpassword: "",
+      });
+    } catch (error) {
+      toast.error("Unable to register");
+      console.log(error);
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8 mt-17">
-        <h1 className="font-bold text-4xl text-center text-blue-700 mb-3">Register</h1>
+        <h1 className="font-bold text-4xl text-center text-blue-700 mb-3">
+          Register
+        </h1>
         <form>
           <div className="flex flex-col gap-1 mb-3">
-            <label htmlFor="username" className="font-semibold text-sm text-gray-700">
+            <label
+              htmlFor="username"
+              className="font-semibold text-sm text-gray-700"
+            >
               Username
             </label>
             <input
@@ -71,7 +88,10 @@ const RegisterPage = () => {
           </div>
 
           <div className="flex flex-col gap-1 mb-5">
-            <label htmlFor="email" className="font-semibold text-sm text-gray-700">
+            <label
+              htmlFor="email"
+              className="font-semibold text-sm text-gray-700"
+            >
               Email
             </label>
             <input
@@ -87,7 +107,10 @@ const RegisterPage = () => {
           </div>
 
           <div className="flex flex-col gap-1 mb-5">
-            <label htmlFor="password" className="font-semibold text-sm text-gray-700">
+            <label
+              htmlFor="password"
+              className="font-semibold text-sm text-gray-700"
+            >
               Password
             </label>
             <input
@@ -103,7 +126,10 @@ const RegisterPage = () => {
           </div>
 
           <div className="flex flex-col gap-1 mb-7">
-            <label htmlFor="confirmpassword" className="font-semibold text-sm text-gray-700">
+            <label
+              htmlFor="confirmpassword"
+              className="font-semibold text-sm text-gray-700"
+            >
               Confirm Password
             </label>
             <input

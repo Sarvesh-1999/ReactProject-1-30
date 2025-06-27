@@ -1,4 +1,32 @@
 {
-  "users": [],
-  "admin": []
+  "users": [
+    {
+      "id": "a029",
+      "username": "John Doe",
+      "email": "john@gmail.com",
+      "password": "123456789",
+      "confirmpassword": "123456789"
+    },
+    {
+      "id": "02dd",
+      "username": "Clark Kent",
+      "email": "clark@gmail.com",
+      "password": "0987654321",
+      "confirmpassword": "0987654321"
+    },
+    {
+      "id": "d672",
+      "username": "qwertyui",
+      "email": "qwertyu@gmail.com",
+      "password": "1234567890",
+      "confirmpassword": "1234567890"
+    },
+    {
+      "id": "db47",
+      "username": "qwertyuio",
+      "email": "qwertyui@gmail.com",
+      "password": "1234567890",
+      "confirmpassword": "1234567890"
+    }
+  ]
 }
