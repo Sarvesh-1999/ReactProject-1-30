@@ -1,10 +1,18 @@
 import React, { useState } from "react";
+import { useApi } from "../utilities/utilities";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
+
+  let allUsers = useApi("/users");
+  console.log(allUsers);
 
   const handleChange = (e) => {
     let { name, value } = e.target;
@@ -15,6 +23,28 @@ const LoginPage = () => {
     e.preventDefault();
     console.log("Form Submitted");
     console.log(formData);
+
+    let authUser = allUsers.find((singleUser) => {
+      return (
+        singleUser.email === formData.email &&
+        singleUser.password === formData.password
+      );
+    });
+
+    console.log(authUser);
+
+    if (authUser) {
+      // toast message
+      toast.success("Login Successful");
+
+      // navigate Home.jsx
+      navigate("/home");
+
+      // store token in localStorage
+      localStorage.setItem("accesstoken", Date.now());
+    } else {
+      toast.error("Invalid credentials");
+    }
   };
 
   return (
