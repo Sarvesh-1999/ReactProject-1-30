@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 
 const Layout = () => {
   return (
-    <div>
+    <div className="bg-gray-50">
       <ToastContainer position="bottom-right"/>
       <Navbar />
       <Outlet />

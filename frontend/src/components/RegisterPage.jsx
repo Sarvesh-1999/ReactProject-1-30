@@ -69,9 +69,9 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300">
+    <div className="min-h-screen flex items-center justify-center ">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8 mt-17">
-        <h1 className="font-bold text-4xl text-center text-blue-700 mb-3">
+        <h1 className="font-bold text-4xl text-center text-black mb-3">
           Register
         </h1>
         <form>
@@ -83,7 +83,7 @@ const RegisterPage = () => {
               Username
             </label>
             <input
-              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black transition"
               type="text"
               name="username"
               id="username"
@@ -102,7 +102,7 @@ const RegisterPage = () => {
               Email
             </label>
             <input
-              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black transition"
               type="email"
               name="email"
               id="email"
@@ -121,7 +121,7 @@ const RegisterPage = () => {
               Password
             </label>
             <input
-              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black transition"
               type="password"
               name="password"
               id="password"
@@ -140,7 +140,7 @@ const RegisterPage = () => {
               Confirm Password
             </label>
             <input
-              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black transition"
               type="password"
               name="confirmpassword"
               id="confirmpassword"
@@ -152,7 +152,7 @@ const RegisterPage = () => {
           </div>
           <button
             onClick={register}
-            className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg shadow hover:bg-blue-700 transition"
+            className="w-full bg-black text-white font-semibold py-2 rounded-lg shadow "
           >
             Register
           </button>

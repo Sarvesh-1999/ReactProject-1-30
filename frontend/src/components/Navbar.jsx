@@ -4,15 +4,15 @@ const Navbar = () => {
   let accesstoken = localStorage.getItem("accesstoken");
 
   return (
-    <nav className="absolute top-0 h-[70px] w-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-between px-6 shadow-lg z-50">
-      <div className="font-extrabold text-3xl text-white  drop-shadow-lg select-none">
+    <nav className="absolute top-0 h-[70px] w-full bg-white flex items-center justify-between px-6 shadow z-50">
+      <div className="font-extrabold text-3xl text-gray-600  drop-shadow-lg select-none">
         MyApp
       </div>
 
       <aside className="flex gap-4 font-semibold">
         {accesstoken ? (
           <button
-          className="bg-white py-2 px-6 rounded cursor-pointer hover:bg-gray-100"
+          className="bg-black py-2 px-6 rounded text-white cursor-pointer hover:bg-gray-200 hover:border hover:text-black"
           >Logout</button>
         ) : (
           <>
