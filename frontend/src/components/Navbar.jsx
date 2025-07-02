@@ -3,17 +3,56 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   let accesstoken = localStorage.getItem("accesstoken");
 
+  const categories = [
+    {
+      id: "men",
+      title: "Men",
+    },
+    {
+      id: "women",
+      title: "Women",
+    },
+    {
+      id: "kids",
+      title: "Kids",
+    },
+    {
+      id: "footware",
+      title: "Footware",
+    },
+    {
+      id: "accessories",
+      title: "Accessories",
+    },
+    {
+      id: "search",
+      title: "Search",
+    },
+  ];
+
   return (
     <nav className="absolute top-0 h-[70px] w-full bg-white flex items-center justify-between px-6 shadow z-50">
-      <div className="font-extrabold text-3xl text-gray-600  drop-shadow-lg select-none">
+      <div className="font-extrabold text-3xl text-black   select-none">
         MyApp
       </div>
 
-      <aside className="flex gap-4 font-semibold">
+      <aside className="flex gap-4 font-semibold w-[70%] justify-between">
         {accesstoken ? (
-          <button
-          className="bg-black py-2 px-6 rounded text-white cursor-pointer hover:bg-gray-200 hover:border hover:text-black"
-          >Logout</button>
+          <>
+            <section className="flex gap-2">
+              {categories.map((ele) => {
+                return (
+                  <div key={ele.id} className="p-4 font-semibold">
+                    {ele.title}
+                  </div>
+                );
+              })}
+            </section>
+
+            <button className="bg-black py-2 px-6 rounded text-white cursor-pointer hover:bg-gray-200 hover:border hover:text-black">
+              Logout
+            </button>
+          </>
         ) : (
           <>
             <Link to={"/login"}>

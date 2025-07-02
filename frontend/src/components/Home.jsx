@@ -1,4 +1,6 @@
 import { IoShirtOutline } from "react-icons/io5";
+import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
 
 const Home = () => {
   const categories = [
@@ -176,9 +178,47 @@ const Home = () => {
     },
   ];
 
+  const items = [
+    <div className="item h-[70vh]" data-value="1">
+      <img
+        src="/assets/image.png"
+        alt=""
+        className="h-full w-full object-center object-cover"
+      />
+    </div>,
+    <div className="item h-[70vh]" data-value="2">
+      <img
+        src="/assets/image2.jpg"
+        alt=""
+        className="h-full w-full object-center object-cover"
+      />
+    </div>,
+    <div className="item h-[70vh]" data-value="3">
+      <img
+        src="/assets/image3.jpg"
+        alt=""
+        className="h-full w-full object-center object-cover"
+      />
+    </div>,
+    <div className="item h-[70vh]" data-value="4">
+      <img
+        src="/assets/image4.avif"
+        alt=""
+        className="h-full w-full object-center object-cover"
+      />
+    </div>,
+    <div className="item h-[70vh]" data-value="5">
+      <img
+        src="/assets/image5.jpeg"
+        alt=""
+        className="h-full w-full object-center object-cover"
+      />
+    </div>,
+  ];
+
   return (
     <div className="mt-[70px] w-full bg-gray-50">
-      <header className="h-[70vh] w-full relative">
+      {/* <header className="h-[70vh] w-full relative">
         <img
           src="/assets/image.png"
           alt=""
@@ -194,6 +234,21 @@ const Home = () => {
             View Products
           </button>
         </div>
+      </header> */}
+
+      <header className="h-[70vh] w-full">
+        <AliceCarousel
+          autoPlay
+          autoPlayStrategy="none"
+          autoPlayInterval={2000}
+          animationDuration={1000}
+          animationType="slide"
+          infinite
+          touchTracking={false}
+          disableDotsControls
+          disableButtonsControls
+          items={items}
+        />
       </header>
 
       <section className="py-10">
@@ -251,12 +306,16 @@ const Home = () => {
               <section key={idx} className=" p-4">
                 <div className="shadow-lg rounded-lg overflow-hidden w-64">
                   <img
-                    src={"https://www.shutterstock.com/image-vector/no-image-available-picture-coming-600nw-2057829641.jpg"}
+                    src={
+                      "https://www.shutterstock.com/image-vector/no-image-available-picture-coming-600nw-2057829641.jpg"
+                    }
                     alt=""
                     className=" h-64 w-full object-cover object-top block mx-auto"
                   />
                   <div className="p-4">
-                    <h1 className="capitalize font-extrabold text-xl">{product.title}</h1>
+                    <h1 className="capitalize font-extrabold text-xl">
+                      {product.title}
+                    </h1>
                     <p className="flex justify-between text-sm capitalize text-gray-600 font-semibold">
                       <span className="">{product.category}</span>
                       <span>{product.brand}</span>
@@ -265,7 +324,9 @@ const Home = () => {
                       <del>Rs.{product.price}</del>
                       <span>Rs.{product.salePrice}</span>
                     </h3>
-                    <button className="bg-black text-white w-full rounded py-1 mt-3 cursor-pointer">Add to cart</button>
+                    <button className="bg-black text-white w-full rounded py-1 mt-3 cursor-pointer">
+                      Add to cart
+                    </button>
                   </div>
                 </div>
               </section>
