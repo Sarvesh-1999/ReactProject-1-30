@@ -10,9 +10,20 @@ const Navbar = () => {
 
   const categories = [
     {
+      id: "home",
+      title: "Home",
+      path: "/home",
+    },
+    {
+      id: "products",
+      title: "Products",
+      path: "/products",
+    },
+    {
       id: "men",
       title: "Men",
     },
+
     {
       id: "women",
       title: "Women",
@@ -58,9 +69,11 @@ const Navbar = () => {
           <section className="flex gap-2">
             {categories.map((ele) => {
               return (
-                <div key={ele.id} className="p-4 font-semibold">
-                  {ele.title}
-                </div>
+                <Link to={ele.path ? ele.path : "/home"}>
+                  <div key={ele.id} className="p-4 font-semibold">
+                    {ele.title}
+                  </div>
+                </Link>
               );
             })}
           </section>
@@ -71,11 +84,13 @@ const Navbar = () => {
         {accesstoken ? (
           <>
             <button>
-              <CartDrawer/>
+              <CartDrawer />
             </button>
 
-     
-            <Avatar sx={{ bgcolor: "black" }} {...stringAvatar("Rohit Sharma")} />
+            <Avatar
+              sx={{ bgcolor: "black" }}
+              {...stringAvatar("Rohit Sharma")}
+            />
 
             <button
               onClick={handleLogout}
