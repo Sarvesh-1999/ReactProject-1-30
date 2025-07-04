@@ -3,9 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Avatar from "@mui/material/Avatar";
 import CartDrawer from "./CartDrawer";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [menuToggle, setMenuToggled] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuToggled(!menuToggle);
+  };
+
   let accesstoken = localStorage.getItem("accesstoken");
+  
   let navigate = useNavigate();
 
   const categories = [
@@ -87,17 +95,27 @@ const Navbar = () => {
               <CartDrawer />
             </button>
 
-            <Avatar
-              sx={{ bgcolor: "black" }}
-              {...stringAvatar("Rohit Sharma")}
-            />
+            <div className="relative" onClick={toggleMenu}>
+              <Avatar
+                sx={{ bgcolor: "black" }}
+                {...stringAvatar("Rohit Sharma")}
+              />
 
-            <button
-              onClick={handleLogout}
-              className="bg-black py-2 px-6 rounded text-white cursor-pointer hover:bg-gray-200 hover:border hover:text-black"
-            >
-              Logout
-            </button>
+              {menuToggle ? (
+                <>
+                  <div className="absolute min-w-40 p-2 right-0 bg-white rounded shadow-lg top-12 z-50 border border-gray-200">
+                    <ul className="flex flex-col gap-2">
+                      <li
+                        onClick={handleLogout}
+                        className="hover:bg-gray-100 px-2 py-1 cursor-pointer"
+                      >
+                        Logout
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : null}
+            </div>
           </>
         ) : (
           <>

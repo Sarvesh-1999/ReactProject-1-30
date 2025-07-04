@@ -6,17 +6,15 @@ const App = () => {
     <div>
       <RouterProvider router={myRoutes} />
     </div>
-
   );
 };
 
 export default App;
 
-
 // nodejs download ==>
-  // nodejs downlaod >> select LTS version >> download msi installer
-// nodejs installtion  ==> 
-  // all next and then install
+// nodejs downlaod >> select LTS version >> download msi installer
+// nodejs installtion  ==>
+// all next and then install
 
 // open cmd and type node -v
 
