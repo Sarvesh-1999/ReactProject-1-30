@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useApi } from "../utilities/utilities";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { AxiosInstance } from "../routes/axiosInstance";
+import { GlobalAuthContext } from "../authContext/AuthContext";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -9,41 +11,31 @@ const LoginPage = () => {
     password: "",
   });
 
-  const navigate = useNavigate();
+  const { setLoggedInUser } = useContext(GlobalAuthContext);
 
-  let allUsers = useApi("/users");
-  console.log(allUsers);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     let { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const login = (e) => {
+  const login = async (e) => {
     e.preventDefault();
-    console.log("Form Submitted");
     console.log(formData);
-
-    let authUser = allUsers.find((singleUser) => {
-      return (
-        singleUser.email === formData.email &&
-        singleUser.password === formData.password
-      );
-    });
-
-    console.log(authUser);
-
-    if (authUser) {
-      // toast message
-      toast.success("Login Successful");
-
-      // navigate Home.jsx
-      navigate("/home");
-
-      // store token in localStorage
-      localStorage.setItem("accesstoken", Date.now());
-    } else {
-      toast.error("Invalid credentials");
+    try {
+      let response = await AxiosInstance.post("/user/login", {
+        email: formData.email,
+        password: formData.password,
+      });
+      console.log(response);
+      if (response.data.success) {
+        setLoggedInUser(true);
+        toast.success(response.data.message)
+        navigate("/home");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

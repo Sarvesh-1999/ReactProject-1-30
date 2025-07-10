@@ -3,17 +3,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Avatar from "@mui/material/Avatar";
 import CartDrawer from "./CartDrawer";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { GlobalAuthContext } from "../authContext/AuthContext";
 
 const Navbar = () => {
   const [menuToggle, setMenuToggled] = useState(false);
+  const { loggedInUser } = useContext(GlobalAuthContext);
+  console.log(loggedInUser);
 
   const toggleMenu = () => {
     setMenuToggled(!menuToggle);
   };
 
   let accesstoken = localStorage.getItem("accesstoken");
-  
+
   let navigate = useNavigate();
 
   const categories = [
@@ -120,13 +123,13 @@ const Navbar = () => {
         ) : (
           <>
             <Link to={"/login"}>
-              <button className="bg-white text-blue-600 px-6 py-2 rounded-lg shadow hover:bg-blue-100 transition font-bold border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400">
+              <button className="bg-white text-black px-6 py-2 rounded-lg shadow hover:bg-gray-100 transition font-bold border focus:outline-none focus:ring-2 focus:ring-blue-400">
                 Login
               </button>
             </Link>
 
             <Link to={"/"}>
-              <button className="bg-blue-500 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700 transition font-bold border border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200">
+              <button className="bg-black text-white px-6 py-2 rounded-lg shadow transition font-bold border  focus:outline-none focus:ring-2 focus:ring-blue-200">
                 Signup
               </button>
             </Link>
