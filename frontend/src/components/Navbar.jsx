@@ -5,17 +5,19 @@ import Avatar from "@mui/material/Avatar";
 import CartDrawer from "./CartDrawer";
 import { useContext, useState } from "react";
 import { GlobalAuthContext } from "../authContext/AuthContext";
+import { AxiosInstance } from "../routes/axiosInstance";
 
 const Navbar = () => {
   const [menuToggle, setMenuToggled] = useState(false);
-  const { loggedInUser } = useContext(GlobalAuthContext);
+
+  const { loggedInUser, setLoggedInUser , authUser } = useContext(GlobalAuthContext);
   console.log(loggedInUser);
 
   const toggleMenu = () => {
     setMenuToggled(!menuToggle);
   };
 
-  let accesstoken = localStorage.getItem("accesstoken");
+  // let accesstoken = localStorage.getItem("accesstoken");
 
   let navigate = useNavigate();
 
@@ -57,10 +59,19 @@ const Navbar = () => {
     },
   ];
 
-  const handleLogout = () => {
-    localStorage.removeItem("accesstoken");
-    toast.success("logged out");
-    navigate("/login");
+  const handleLogout = async () => {
+    try {
+      let res = await AxiosInstance.post("/user/logout");
+      console.log(res);
+      if (res.data.success) {
+        toast.success(res.data.message);
+        setLoggedInUser(false);
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("logout failed");
+    }
   };
 
   function stringAvatar(name) {
@@ -75,7 +86,7 @@ const Navbar = () => {
         MyApp
       </div>
 
-      {accesstoken ? (
+      {loggedInUser ? (
         <>
           <section className="flex gap-2">
             {categories.map((ele) => {
@@ -92,7 +103,7 @@ const Navbar = () => {
       ) : null}
 
       <aside className="flex gap-4 font-semibold">
-        {accesstoken ? (
+        {loggedInUser ? (
           <>
             <button>
               <CartDrawer />
@@ -101,7 +112,8 @@ const Navbar = () => {
             <div className="relative" onClick={toggleMenu}>
               <Avatar
                 sx={{ bgcolor: "black" }}
-                {...stringAvatar("Rohit Sharma")}
+                className="uppercase"
+                {...stringAvatar(authUser.userName)}
               />
 
               {menuToggle ? (

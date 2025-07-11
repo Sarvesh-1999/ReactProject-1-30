@@ -1,8 +1,16 @@
 import { IoShirtOutline } from "react-icons/io5";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
+import { useEffect } from "react";
+import { AxiosInstance } from "../routes/axiosInstance";
 
 const Home = () => {
+  // useEffect(()=>{
+  //   AxiosInstance.get("/shop/product/get").then(res =>{
+  //     console.log(res);
+  //   })
+  // },[])
+
   const categories = [
     {
       id: "men",
@@ -303,7 +311,7 @@ const Home = () => {
         <article className="grid grid-cols-4 justify-items-center">
           {sampleProducts.map((product, idx) => {
             return (
-              <section key={idx} className=" p-4">
+              <section key={idx} className="p-4">
                 <div className="shadow-lg rounded-lg overflow-hidden w-64">
                   <img
                     src={
