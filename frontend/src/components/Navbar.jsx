@@ -75,8 +75,14 @@ const Navbar = () => {
   };
 
   function stringAvatar(name) {
-    return {
+   let word = name.split(" ")
+   if (word.length >=2 ) {
+       return {
       children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+    };
+   }
+    return {
+      children: `${name.split(" ")[0][0]}`,
     };
   }
 

@@ -1,9 +1,6 @@
 import { IoShirtOutline } from "react-icons/io5";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import { useEffect } from "react";
-import { AxiosInstance } from "../routes/axiosInstance";
-
 const Home = () => {
   // useEffect(()=>{
   //   AxiosInstance.get("/shop/product/get").then(res =>{
