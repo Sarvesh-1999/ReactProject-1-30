@@ -10,7 +10,8 @@ import { AxiosInstance } from "../routes/axiosInstance";
 const Navbar = () => {
   const [menuToggle, setMenuToggled] = useState(false);
 
-  const { loggedInUser, setLoggedInUser , authUser } = useContext(GlobalAuthContext);
+  const { loggedInUser, setLoggedInUser, authUser } =
+    useContext(GlobalAuthContext);
   console.log(loggedInUser);
 
   const toggleMenu = () => {
@@ -75,12 +76,12 @@ const Navbar = () => {
   };
 
   function stringAvatar(name) {
-   let word = name.split(" ")
-   if (word.length >=2 ) {
-       return {
-      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
-    };
-   }
+    let word = name.split(" ");
+    if (word.length >= 2) {
+      return {
+        children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+      };
+    }
     return {
       children: `${name.split(" ")[0][0]}`,
     };

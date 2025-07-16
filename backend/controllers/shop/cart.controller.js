@@ -30,8 +30,7 @@ const addToCart = expressAsyncHandler(async (req, res, next) => {
   new ApiResponse(true, "Product added to cart successfully", cart, 200).send(
     res
   );
-});
-
+}); 
 // ─── Fetch Cart Items ──────────────────────────────────────────────────────────
 const fetchCartItems = expressAsyncHandler(async (req, res, next) => {
   const userId = req.user._id;
