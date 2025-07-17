@@ -1,10 +1,12 @@
 import { IoTrashBinOutline } from "react-icons/io5";
 
-const CartProduct = ({ product }) => {
+const CartProduct = ({ product, onDecrease, onIncrease, onRemove }) => {
   return (
     <div className="p-3 flex gap-3 rounded-xl shadow-md border border-gray-200 bg-white items-center">
       <img
-        src={"https://www.dropicts.com/wp-content/uploads/Dropicts-Feautred-Images-Beauty-Product-02.jpg"}
+        src={
+          "https://www.dropicts.com/wp-content/uploads/Dropicts-Feautred-Images-Beauty-Product-02.jpg"
+        }
         alt={product.title}
         className="border h-24 w-24 object-center object-cover rounded-lg"
       />
@@ -17,7 +19,7 @@ const CartProduct = ({ product }) => {
             className="text-red-500 hover:text-red-700 text-xl px-2 py-1 rounded transition-colors"
             title="Remove from cart"
           >
-            <IoTrashBinOutline />
+            <IoTrashBinOutline onClick={() => onRemove(product)} />
           </button>
         </div>
         <div className="flex items-center gap-2 text-gray-600 text-sm">
@@ -37,6 +39,7 @@ const CartProduct = ({ product }) => {
             className="h-8 w-8 flex items-center justify-center font-bold text-lg rounded-full bg-gray-200 hover:bg-gray-300 transition-all"
             disabled={product.quantity <= 1}
             title="Decrease quantity"
+            onClick={() => onDecrease(product)}
           >
             -
           </button>
@@ -46,6 +49,7 @@ const CartProduct = ({ product }) => {
           <button
             className="h-8 w-8 flex items-center justify-center font-bold text-lg rounded-full bg-gray-200 hover:bg-gray-300 transition-all"
             title="Increase quantity"
+            onClick={() => onIncrease(product)}
           >
             +
           </button>

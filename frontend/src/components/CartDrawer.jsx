@@ -20,8 +20,36 @@ export default function CartDrawer() {
     getCartItems();
   };
 
+  const onClearCart = async () => {
+    await AxiosInstance.delete("/shop/cart/clear");
+    getCartItems();
+  };
+
+  const onDecrease = async (product) => {
+    await AxiosInstance.patch("/shop/cart/update", {
+      productId: product.productId,
+    });
+    getCartItems();
+  };
+
+  const onIncrease = async (product) => {
+    await AxiosInstance.post("/shop/cart/add", {
+      productId: product.productId,
+    });
+    getCartItems();
+  };
+
+  const onRemove = async (product) => {
+    await AxiosInstance.delete(`/shop/cart/delete/${product.productId}`);
+    getCartItems();
+  };
+
+  let totalPrice = cartItems.reduce((sum, item) => {
+    return sum + item.salePrice * item.quantity;
+  }, 0);
+
   const DrawerList = (
-    <Box sx={{ width: 400 }} role="presentation">
+    <Box sx={{ width: 400 }} role="presentation" className="relative">
       <div className="p-4 flex justify-between items-center">
         <h1 className="text-3xl font-semibold">My Cart</h1>
 
@@ -30,11 +58,38 @@ export default function CartDrawer() {
 
       <Divider />
 
-      <div>
-        {cartItems.map((item) => {
-          return <CartProduct product={item}/>
-        })}
+      <h1 className="text-end p-2 text-xl font-semibold text-red-400">
+        <span
+          className=" hover:text-red-700 cursor-pointer"
+          onClick={onClearCart}
+        >
+          Clear cart
+        </span>
+      </h1>
+
+      <div className="pb-20">
+        {cartItems.length === 0 ? (
+          <h1 className="text-center font-semibold">Cart is empty</h1>
+        ) : (
+          cartItems.map((item, idx) => {
+            return (
+              <CartProduct
+                product={item}
+                key={idx}
+                onDecrease={onDecrease}
+                onIncrease={onIncrease}
+                onRemove={onRemove}
+              />
+            );
+          })
+        )}
       </div>
+
+      <Divider />
+
+      <h1 className="text-center  absolute py-5 bg-white w-full  bottom-0  right-0 text-2xl pe-3">
+        Total Price : Rs. {Math.round(totalPrice)}
+      </h1>
     </Box>
   );
 
