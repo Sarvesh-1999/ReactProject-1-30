@@ -4,7 +4,7 @@ import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
 import { IoCart, IoClose } from "react-icons/io5";
 import { AxiosInstance } from "../routes/axiosInstance";
-import { useEffect } from "react";
+import CartProduct from "./CartProduct";
 
 export default function CartDrawer() {
   const [open, setOpen] = React.useState(false);
@@ -27,16 +27,12 @@ export default function CartDrawer() {
 
         <IoClose size={30} onClick={toggleDrawer(false)} />
       </div>
-      
+
       <Divider />
 
       <div>
         {cartItems.map((item) => {
-          return (
-            <div className="border p-3">
-              <h1 className="font-semibold text-xl">{item.title}</h1>
-            </div>
-          );
+          return <CartProduct product={item}/>
         })}
       </div>
     </Box>
